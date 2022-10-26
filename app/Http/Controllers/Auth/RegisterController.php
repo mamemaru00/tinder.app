@@ -91,11 +91,13 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
+        // dd($request->all());
+        // exit;
        // 画像upload
        $fileName = $request->file('image')->getClientOriginalName();
        Storage::putFileAs('public/images', $request->file('image'), $fileName);
        $fullFilePath = '/storage/images/'. $fileName;
-
+       
         $data = $request->all();
 
         return User::create([
