@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-// use Illuminate\Http\JsonResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Storage;
 
@@ -91,10 +91,10 @@ class RegisterController extends Controller
      */
     protected function create(Request $request)
     {
-        // 画像アップロード機能
-        $fileName = $request->file('image')->getClientOriginalName();
-        Storage::putFileAs('public/images', $request->file('image'), $fileName);
-        $fullFilePath = '/storage/images'. $fileName;
+       // 画像upload
+       $fileName = $request->file('image')->getClientOriginalName();
+       Storage::putFileAs('public/images', $request->file('image'), $fileName);
+       $fullFilePath = '/storage/images/'. $fileName;
 
         $data = $request->all();
 
