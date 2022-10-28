@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SwipesController;
+use App\Http\Controllers\MatchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
     Route::post('/swipes', [SwipesController::class, 'store'])->name('swipes.store');
+
+    Route::get('/matches', [MatchController::class, 'index'])->name('matches.index');
 });
