@@ -9,18 +9,30 @@ use App\Models\User;
 class UserController extends Controller
 {
 
+    // public function index()
+    // {
+    //     // すでにswipeしたuserを省いて、swipeしていないuserを1つ取得する
+
+    //     //すでに取得したuser・idsを取得
+    //     $swipeduserIds =  Swipe::where('from_user_id', \Auth::user()->id)->get()->pluck('to_user_id');
+
+    //     //swipeしていないuserを1一つ取得
+    //     $user = User::where('id', '<>', \Auth::user()->id)->whereNotIn('id', $swipeduserIds)->first();
+
+    //     return view('pages.user.index', [
+    //         'user' =>$user,
+    //     ]);
+    // }
+
     public function index()
     {
-        // すでにswipeしたuserを省いて、swipeしていないuserを1つ取得する
+        // swipeしていないuserを取得
+        $swipedUserId = Swipe::where('from_user_id', \Auth::user()->id)->get()->pluck('to_user_id');
 
-        //すでに取得したuser・idsを取得
-        $swipeduserIds =  Swipe::where('from_user_id', \Auth::user()->id)->get()->pluck('to_user_id');
-
-        //swipeしていないuserを1一つ取得
-        $user = User::where('id', '<>', \Auth::user()->id)->whereNotIn('id', $swipeduserIds)->first();
+        $user = User::whereNotIn('id', $swipedUserId)->where('id', '<>', \Auth::user()->id)->first();
 
         return view('pages.user.index', [
-            'user' =>$user,
+            'user' => $user
         ]);
     }
 }

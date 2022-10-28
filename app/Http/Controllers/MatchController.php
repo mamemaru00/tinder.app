@@ -23,6 +23,7 @@ class MatchController extends Controller
             ->with('toUser')
             ->get();
 
+        dd($matchedUsers);    
         return view('pages.match.index', [
             'matchedUsers' => $matchedUsers
         ]);
